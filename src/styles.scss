@@ -1,0 +1,98 @@
+@import 'assets/scss/helpers';
+@import 'assets/scss/theme';
+@import 'components/clinic-card/clinic-card.component.scss';
+
+* {
+  font-family: sans-serif;
+  color: map-deep-get($theme,'text','primary');
+}
+
+body {
+  background: map-deep-get($theme,'background','system');
+}
+
+.btn {
+  cursor: pointer;
+  border: none;
+  padding: 5px 15px;
+  font-weight: bold;
+
+  @include border-radius(50px);
+}
+
+input, select, .input-box{
+  border: 1px solid map-deep-get($theme,'background','config');
+  padding: 5px 15px;
+  margin-bottom: 10px;
+  outline: none;
+  -webkit-appearance: menulist;
+
+  @include border-radius(map-deep-get($sys,'border-radius'));
+
+  &:hover, &:focus, &:focus-within {
+    border: 1px solid map-deep-get($theme,'pallet','primary');
+    box-shadow: 
+      inset 0px -1px 0px 0px map-deep-get($theme,'pallet','primary'),
+      2px 2px 9px -4px map-deep-get($theme,'pallet','primary');
+  }
+  &:focus, &:focus-within{
+    color: map-deep-get($theme,'pallet','primary');
+  }
+}
+
+input{
+  width: 60px;
+}
+
+select{
+  padding-right: 10px;
+}
+
+
+.input-group {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-evenly;
+}
+
+.input-box {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  overflow: hidden;
+  height: 29px;
+  padding: 0;
+  padding-left: 15px;
+
+  & .prefix {
+    font-weight: 300;
+    font-size: 14px;
+    color: #999;
+  }
+  
+  & input {
+    background: transparent;
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    margin-bottom: 0;
+  }
+}
+
+
+
+
+
+
+// debugger
+pre{
+  background: map-deep-get($theme,'background','config');
+  padding: 10px;
+  color: map-deep-get($theme,'pallet','info');
+  font-size: 12px;
+  white-space: pre-line;
+
+  @include border-radius(map-deep-get($sys,'border-radius'));
+}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sycle Timeslot Exercise</title>
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <h1>Available Timeslots - Pedro Hymino</h1>
+    <div ng-app="myApp" ng-controller="myController as ctrl">
+      <clinic-card
+        ng-repeat="clinic in ctrl.clinics"
+        clinic="clinic"
+      ></clinic-card>
+    </div>
+
+    <script src="src/index.js"></script>
+    <script src="src/components/clinic-card/clinic-card.component.js"></script>
+  </body>
+</html>

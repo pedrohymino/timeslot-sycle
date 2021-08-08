@@ -1,0 +1,45 @@
+$theme: (
+  pallet: (
+    primary: #5b78ee,
+    secondary: #ff8a00,
+    info: #35c2fd,
+    warning: #ffc348,
+    success: #03e48d,
+    danger: #fe3870,
+  ),
+  text: (
+    default:  #fff,
+    primary:  #262837,
+    secondary: #9797a3, 
+  ),
+  background: (
+    system: #f1f5fd,
+    card: #fff,
+    config: #3f4565,
+  ),
+);
+$btn-default-text: (danger primary);
+
+$sys:(
+  border-radius:16px
+);
+
+@each $key, $value in map-deep-get($theme, 'pallet') {
+  .btn-#{$key}{
+    @if index($btn-default-text, $key) {
+      color: map-deep-get($theme,'text','default');
+    } @else {
+      color: map-deep-get($theme,'text','primary');
+    }
+    background: $value;
+    &:hover{
+      background: darken($value,10%);
+    }
+  }
+
+  .text-#{$key}{
+    color: $value;
+  }
+}
+
+  

@@ -1,0 +1,20 @@
+@function map-deep-get($map, $keys...) {
+   $scope: $map; $i: 1;
+   @while (type-of($scope) == map) and ($i <= length($keys)) {
+      $scope: map-get($scope, nth($keys, $i));
+      $i: $i + 1;
+   }
+   @return $scope;
+}
+
+@mixin transition($property, $duration, $easing: linear) {
+	transition: $property $duration $easing;
+	-webkit-transition: $property $duration $easing;
+	-moz-transition: $property $duration $easing;
+}
+
+@mixin border-radius($radius) {
+	border-radius: $radius;
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+}

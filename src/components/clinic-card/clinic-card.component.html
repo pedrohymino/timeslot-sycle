@@ -1,0 +1,105 @@
+<div class="clinic-card">
+  <header>
+    <h2 class="clinic-name">{{$ctrl.clinic.name}}</h2>
+    <img
+      class="settings"
+      src="src/assets/img/settings.png"
+      ng-click="$ctrl.toggleView('isConfigOpen')"
+    />
+  </header>
+
+  <!-- <pre>
+    clinic: {{$ctrl.clinic.config}}
+    timeslot.listAvailable: {{$ctrl.timeslot.listAvailable.length}}
+    timeslot.selected: {{$ctrl.timeslot.selected}} 
+  </pre> -->
+
+  <div class="content">
+    <h3 ng-class="{'text-danger': $ctrl.notAvailable}">
+      {{$ctrl.notAvailable ? 'No timeslots available' :'Available timeslots'}}
+    </h3>
+    <select name="timeslots" ng-model="$ctrl.timeslot.selected">
+      <option value="" ng-if="$ctrl.timeslot.selected === ''"
+        >{{$ctrl.notAvailable ? '⚠️ No timeslot available!' : '⏰ Please choose
+        an option'}}</option
+      >
+      <option
+        ng-repeat="opt in $ctrl.timeslot.listAvailable"
+        value="{{opt.minutes}}"
+        >{{opt.label}}</option
+      >
+    </select>
+  </div>
+
+  <div class="clinic-config" ng-class="{'open': $ctrl.isConfigOpen}">
+    <div class="info-config" ng-if="!$ctrl.isEditing">
+      <div>
+        <label>Duration:</label> <b>{{$ctrl.clinic.config.duration}}</b>
+      </div>
+      <div>
+        <label>Max hours:</label> <b>{{$ctrl.clinic.config.maxHours}}</b>
+      </div>
+
+      <footer>
+        <button
+          class="btn btn-danger"
+          ng-click="$ctrl.toggleView('isConfigOpen')"
+        >
+          Close
+        </button>
+        <button class="btn btn-info" ng-click="$ctrl.toggleView('isEditing')">
+          Edit
+        </button>
+      </footer>
+    </div>
+
+    <div class="edit-config" ng-if="$ctrl.isEditing">
+      <form
+        ng-submit="$ctrl.save($ctrl.newConfig)"
+        (keydown.enter)="$event.preventDefault()"
+      >
+        <div class="input-group">
+          <label>Duration:</label>
+          <div class="input-box">
+            <span class="prefix">Minutes:</span>
+            <input
+              class="with-prefix"
+              type="number"
+              name="duration"
+              required
+              min="1"
+              ng-model="$ctrl.newConfig.duration"
+              ng-value="$ctrl.clinic.config.duration"
+            />
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Max hours:</label>
+          <div class="input-box">
+            <span class="prefix">Hours</span>
+            <input
+              type="number"
+              class="with-prefix"
+              name="maxHours"
+              required
+              min="0"
+              max="8"
+              ng-model="$ctrl.newConfig.maxHours"
+              ng-value="$ctrl.clinic.config.maxHours"
+            />
+          </div>
+        </div>
+        <footer>
+          <button
+            type="button"
+            class="btn btn-danger"
+            ng-click="$ctrl.cancel()"
+          >
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-success">Save</button>
+        </footer>
+      </form>
+    </div>
+  </div>
+</div>
